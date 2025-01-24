@@ -1,1 +1,3 @@
 Makefile
+build/
+game-1.elf
