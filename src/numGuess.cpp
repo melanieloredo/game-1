@@ -30,9 +30,3 @@ void guesser(int guesses) {
 
     std::cout << std::endl << "you lose... :(";
 }
-
-int main() {
-    guesser(2);
-
-    return 0;
-}
