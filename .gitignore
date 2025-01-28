@@ -1,3 +1,5 @@
 Makefile
 build/
-game-1.elf
+*.elf
+*.sav
+.vscode
