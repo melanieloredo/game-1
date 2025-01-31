@@ -91,9 +91,11 @@ int main() {
 
     show_title(); // Display the title screen
 
-    numberPicker(); // Start the number picker game
+    //numberPicker(); // Start the number picker game
 
     while (true) {
+        numberPicker();
+
         bn::core::update(); // Keep the game running
     }
 }
