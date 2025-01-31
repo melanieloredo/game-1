@@ -24,7 +24,7 @@ namespace {
         bg.set_visible(false); // Ensure the title background is hidden
     }
 
-    void numberPicker() {
+    void numberPicker(int target_value) {
         // Initialize the text generator
         bn::sprite_text_generator text_generator(fixed_32x64_sprite_font);
         text_generator.set_center_alignment();
@@ -34,15 +34,15 @@ namespace {
         bn::vector<bn::sprite_ptr, 32> text_sprites; // Holds the sprites for the numbers
 
         // Initialize the random generator
-        bn::random random_generator;
+        // bn::random random_generator;
 
         // Generate a random target number
-        int warm_up_steps = 20; // Introduce variability with multiple warm-up calls
-        for (int i = 0; i < warm_up_steps; ++i) {
-            random_generator.get_int(10); // Warm up the generator
-        }
+        // int warm_up_steps = 20; // Introduce variability with multiple warm-up calls
+        // for (int i = 0; i < warm_up_steps; ++i) {
+        //     random_generator.get_int(10); // Warm up the generator
+        // }
 
-        int target_value = random_generator.get_int(10); // Random number between 0 and 9
+        // int target_value = random_generator.get_int(10); // Random number between 0 and 9
         int value = 0; // Current selected number
 
         // Main loop for the number picker
@@ -91,9 +91,14 @@ int main() {
 
     show_title(); // Display the title screen
 
-    numberPicker(); // Start the number picker game
+    bn::random random_generator;
+
+    //numberPicker(); // Start the number picker game
 
     while (true) {
+        int value = random_generator.get_int(10);
+        numberPicker(value);
+
         bn::core::update(); // Keep the game running
     }
 }
