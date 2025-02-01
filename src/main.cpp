@@ -29,20 +29,13 @@ namespace {
         bn::sprite_text_generator text_generator(fixed_32x64_sprite_font);
         text_generator.set_center_alignment();
 
+        bn::sprite_text_generator text_generator2(common::fixed_8x8_sprite_font);
+        text_generator2.set_center_alignment();
+
         // Define the numbers to be displayed
         bn::string_view text[10] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         bn::vector<bn::sprite_ptr, 32> text_sprites; // Holds the sprites for the numbers
 
-        // Initialize the random generator
-        // bn::random random_generator;
-
-        // Generate a random target number
-        // int warm_up_steps = 20; // Introduce variability with multiple warm-up calls
-        // for (int i = 0; i < warm_up_steps; ++i) {
-        //     random_generator.get_int(10); // Warm up the generator
-        // }
-
-        // int target_value = random_generator.get_int(10); // Random number between 0 and 9
         int value = 0; // Current selected number
 
         // Main loop for the number picker
@@ -61,16 +54,22 @@ namespace {
             // Generate the current number display
             text_generator.generate(0, 0, text[value], text_sprites);
 
+            //for testing win screen
+            //text_generator.generate(0, 40, text[target_value], text_sprites);
+
             // Check if player presses A to confirm their selection
             if (bn::keypad::a_pressed()) {
                 text_sprites.clear(); // Clear the number sprites
                 bn::vector<bn::sprite_ptr, 32> result_sprites; // Result text sprites
+                bn::vector<bn::sprite_ptr, 32> instruction_sprites;
 
                 // Display result based on selection
                 if (value == target_value) {
-                    text_generator.generate(0, 20, "You Win!", result_sprites);
+                    text_generator.generate(16, 4, "You Win!", result_sprites);
+                    text_generator2.generate(10, 40, "Press Start to Play Again", instruction_sprites);
                 } else {
-                    text_generator.generate(0, 20, "You Lose!", result_sprites);
+                    text_generator.generate(16, 4, "You Lose!", result_sprites);
+                    text_generator2.generate(10, 40, "Press Start to Play Again", instruction_sprites);
                 }
 
                 // Wait for the player to press Start to exit
